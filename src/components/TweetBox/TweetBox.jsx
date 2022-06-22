@@ -2,6 +2,8 @@ import * as React from 'react';
 import TweetInput from './TweetInput';
 import './TweetBox.css';
 
+let charactersLeft = 140;
+
 export default function TweetBox({
   tweets,
   userProfile,
@@ -9,24 +11,25 @@ export default function TweetBox({
   tweetText,
   setTweetText,
 }) {
+  // const [isExpanded, setIsExpanded] = React.useState()
   const handleOnTweetTextChange = (event) => {
     setTweetText(event.target.value);
+    charactersLeft = 140 - event.target.value.length;
   };
 
   const handleOnSubmit = () => {
-    // if (tweetText.length > 0 && tweetText.length <= 140) {  
-      const newTweet = {
-        ...userProfile,
-        text: tweetText,
-        comments: 0,
-        retweets: 0,
-        likes: 0,
-        id: tweets.length,
-      };
-      setTweetText('');
-      setTweets([...tweets, newTweet]);
+    // if (tweetText.length > 0 && tweetText.length <= 140) {
+    const newTweet = {
+      ...userProfile,
+      text: tweetText,
+      comments: 0,
+      retweets: 0,
+      likes: 0,
+      id: tweets.length,
+    };
+    setTweetText('');
+    setTweets([...tweets, newTweet]);
     // }
-    
   };
 
   return (
@@ -69,7 +72,10 @@ export function TweetSubmitButton({ handleOnSubmit }) {
   return (
     <div className={`tweet-submit`}>
       <i className="fas fa-plus-circle"></i>
-      <button className="tweet-submit-button" onClick={handleOnSubmit}>
+      <button
+        onClick={handleOnSubmit}
+        disabled={charactersLeft < 0}
+        className="tweet-submit-button">
         Tweet
       </button>
     </div>
