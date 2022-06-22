@@ -11,7 +11,7 @@ export default function TweetBox({
   tweetText,
   setTweetText,
 }) {
-  // const [isExpanded, setIsExpanded] = React.useState()
+  const [isExpanded, setIsExpanded] = React.useState(false);
   const handleOnTweetTextChange = (event) => {
     setTweetText(event.target.value);
     charactersLeft = 140 - event.target.value.length;
@@ -34,10 +34,15 @@ export default function TweetBox({
 
   return (
     <div className="tweet-box">
-      <TweetInput value={tweetText} handleOnChange={handleOnTweetTextChange} />
+      <TweetInput
+        value={tweetText}
+        handleOnChange={handleOnTweetTextChange}
+        setIsExpanded={setIsExpanded}
+        isExpanded={isExpanded}
+      />
 
       <div className="tweet-box-footer">
-        <TweetBoxIcons />
+        <TweetBoxIcons isExpanded={isExpanded} />
         <TweetCharacterCount characters={tweetText.length} />
         <TweetSubmitButton
           tweetText={tweetText}
@@ -48,10 +53,10 @@ export default function TweetBox({
   );
 }
 
-export function TweetBoxIcons() {
+export function TweetBoxIcons({ isExpanded }) {
   return (
     <div className="tweet-box-icons">
-      <i className="fas fa-image"></i>
+      <i className={`fas ${isExpanded ? "fa-smile" : "fa-image"}`}></i>
       <i className="icon-gif">GIF</i>
       <i className="far fa-chart-bar"></i>
       <i className="fas fa-map-marker-alt"></i>

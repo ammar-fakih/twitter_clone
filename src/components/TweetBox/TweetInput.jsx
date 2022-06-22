@@ -10,8 +10,16 @@ export default function TweetInput(props) {
         name="new-tweet-input"
         type="text"
         placeholder="What's Happening?"
+        className={`${props.isExpanded ? 'expanded' : ''}`}
         value={props.value}
-        onChange={props.handleOnChange}></textarea>
+        onChange={props.handleOnChange}
+        onFocus={() => {
+          props.setIsExpanded(true);
+        }}
+        onBlur={() => {
+          props.setIsExpanded(false);
+        }}
+      />
       <SmileIcon />
     </div>
   );
