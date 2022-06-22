@@ -90,3 +90,12 @@
   margin-top: 5px;
   font-size: 20px;
 }
+
+.red {
+  color: red;
+}
+
+#disabled {
+  display: none
+
+}
