@@ -18,7 +18,6 @@ export default function TweetBox({
   };
 
   const handleOnSubmit = () => {
-    // if (tweetText.length > 0 && tweetText.length <= 140) {
     const newTweet = {
       ...userProfile,
       text: tweetText,
@@ -29,7 +28,6 @@ export default function TweetBox({
     };
     setTweetText('');
     setTweets([...tweets, newTweet]);
-    // }
   };
 
   return (
